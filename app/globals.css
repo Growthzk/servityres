@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 🌟 Paleta base ServiTyres */
+:root {
+  --background: #ffffff;
+  --foreground: #000000;
+
+  /* 🧩 Variables de tipografía (definidas en layout.tsx) */
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* 🌙 Modo oscuro automático */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #000000;
+    --foreground: #ffffff;
+  }
+}
+
+/* ⚙️ Estilos base */
+body {
+  @apply bg-[var(--background)] text-[var(--foreground)] antialiased transition-colors duration-300;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* 🧱 Tipografía global */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-bold;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+p {
+  @apply text-graySoft;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* 🔤 Texto de código o monoespaciado */
+code, pre {
+  font-family: var(--font-mono), monospace;
+}
+
+/* 🔗 Enlaces */
+a {
+  @apply text-primary hover:text-secondary transition-colors;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* 🟡 Botón base */
+.btn {
+  @apply bg-primary text-dark font-semibold px-6 py-2 rounded-lg hover:bg-secondary transition-all duration-300;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* 🎨 GRID DE FONDO PARA HERO (AÑADIDO) */
+@layer utilities {
+  .bg-grid-gray-200\/50 {
+    background-image: 
+      linear-gradient(rgba(229, 231, 235, 0.5) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(229, 231, 235, 0.5) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+  
+  .dark .bg-grid-gray-800\/50 {
+    background-image: 
+      linear-gradient(rgba(55, 65, 81, 0.5) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(55, 65, 81, 0.5) 1px, transparent 1px);
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "files.exclude": {
+    "**/webfonts": true,
+    "**/*.woff2": false
+  },
+  "typescript.preferences.includePackageJsonAutoImports": "off"
+}
