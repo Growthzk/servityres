@@ -2,16 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ===== ESTO ES LO QUE FALTABA ===== */
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
 @layer base {
   :root {
     --background: oklch(1 0 0);
@@ -54,5 +44,13 @@
     --border: oklch(0.3 0.02 265);
     --input: oklch(0.3 0.02 265);
     --ring: oklch(0.8 0.15 220);
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
   }
 }
