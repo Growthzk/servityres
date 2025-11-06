@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ===== ESTO ES LO QUE FALTABA ===== */
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
 @layer base {
   :root {
     --background: oklch(1 0 0);
@@ -11,56 +21,38 @@
     --popover: oklch(1 0 0);
     --popover-foreground: oklch(0.235 0.015 65);
     --primary: oklch(0.75 0.15 85);
-    --primary-foreground: oklch(0.15 0.01 285);
+    --primary-foreground: oklch(0.15 0.03 285);
     --secondary: oklch(0.98 0.001 286.375);
     --secondary-foreground: oklch(0.4 0.015 65);
     --muted: oklch(0.967 0.001 286.375);
     --muted-foreground: oklch(0.552 0.016 285.938);
     --accent: oklch(0.967 0.001 286.375);
-    --accent-foreground: oklch(0.141 0.005 285.823);
-    --destructive: oklch(0.577 0.245 27.325);
-    --destructive-foreground: oklch(0.985 0 0);
-    --border: oklch(0.92 0.004 286.32);
-    --input: oklch(0.92 0.004 286.32);
+    --accent-foreground: oklch(0.4 0.015 65);
+    --destructive: oklch(0.6 0.15 25);
+    --border: oklch(0.9 0.01 286);
+    --input: oklch(0.9 0.01 286);
     --ring: oklch(0.75 0.15 85);
-    --radius: 0.65rem;
+    --radius: 0.5rem;
   }
 
   .dark {
-    --background: oklch(0.141 0.005 285.823);
-    --foreground: oklch(0.85 0.005 65);
-    --primary: oklch(0.75 0.15 85);
-    --border: oklch(0.22 0.01 286);
-  }
-
-  * {
-    @apply border-border;
-    box-sizing: border-box;
-  }
-
-  body {
-    @apply bg-background text-foreground antialiased;
-    margin: 0;
-    padding: 0;
-  }
-}
-
-@import "tw-animate-css";
-
-@layer components {
-  .container {
-    @apply w-full mx-auto px-4 md:px-6 lg:px-8 lg:max-w-5xl;
-  }
-  .btn {
-    @apply bg-primary text-primary-foreground font-bold px-8 py-3 rounded-xl hover:bg-primary/90 transition-all;
-  }
-}
-
-@layer utilities {
-  .bg-grid-gray-200\/50 {
-    background-image: 
-      linear-gradient(rgba(229,231,235,0.5) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(229,231,235,0.5) 1px, transparent 1px);
-    background-size: 50px 50px;
+    --background: oklch(0.15 0.015 265);
+    --foreground: oklch(0.95 0.01 265);
+    --card: oklch(0.15 0.015 265);
+    --card-foreground: oklch(0.95 0.01 265);
+    --popover: oklch(0.15 0.015 265);
+    --popover-foreground: oklch(0.95 0.01 265);
+    --primary: oklch(0.8 0.15 220);
+    --primary-foreground: oklch(0.15 0.03 265);
+    --secondary: oklch(0.2 0.015 265);
+    --secondary-foreground: oklch(0.95 0.01 265);
+    --muted: oklch(0.2 0.015 265);
+    --muted-foreground: oklch(0.65 0.01 265);
+    --accent: oklch(0.3 0.1 220);
+    --accent-foreground: oklch(0.95 0.01 265);
+    --destructive: oklch(0.6 0.15 25);
+    --border: oklch(0.3 0.02 265);
+    --input: oklch(0.3 0.02 265);
+    --ring: oklch(0.8 0.15 220);
   }
 }
