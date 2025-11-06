@@ -30,15 +30,18 @@
     --background: oklch(0.141 0.005 285.823);
     --foreground: oklch(0.85 0.005 65);
     --primary: oklch(0.75 0.15 85);
-    --border: oklch(1 0 0 / 10%);
+    --border: oklch(0.22 0.01 286);
   }
 
   * {
     @apply border-border;
+    box-sizing: border-box;
   }
 
   body {
     @apply bg-background text-foreground antialiased;
+    margin: 0;
+    padding: 0;
   }
 }
 
@@ -61,5 +64,3 @@
     background-size: 50px 50px;
   }
 }
-
-/* KEIVIN - SERVITYRES.SHOP - BUILD 100% OK - NOV 2025 */
