@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* FORZAR QUE border-border EXISTA ANTES DE QUE TAILWIND LO PROCESÉ */
+@layer base {
+  .border-border {
+    border-color: var(--border);
+  }
+}
+
 @layer base {
   :root {
     --background: oklch(1 0 0);
