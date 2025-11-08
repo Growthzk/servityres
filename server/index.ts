@@ -1,33 +1,25 @@
+// server/index.ts
 import express from "express";
 import { createServer } from "http";
 import path from "path";
-import { fileURLToPath } from "url";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const app = express();
+const server = createServer(app);
 
-async function startServer() {
-  const app = express();
-  const server = createServer(app);
+// Determina la raíz del proyecto (donde está package.json)
+const rootDir = path.resolve(process.cwd());
 
-  // Serve static files from dist/public in production
-  const staticPath =
-    process.env.NODE_ENV === "production"
-      ? path.resolve(__dirname, "public")
-      : path.resolve(__dirname, "..", "dist", "public");
+// Sirve archivos estáticos desde dist/public
+const staticPath = path.join(rootDir, "dist", "public");
+app.use(express.static(staticPath, { index: false }));
 
-  app.use(express.static(staticPath));
+// Maneja rutas SPA (fallback a index.html)
+app.get("*", (_req, res) => {
+  res.sendFile(path.join(staticPath, "index.html"));
+});
 
-  // Handle client-side routing - serve index.html for all routes
-  app.get("*", (_req, res) => {
-    res.sendFile(path.join(staticPath, "index.html"));
-  });
-
-  const port = process.env.PORT || 3000;
-
-  server.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}/`);
-  });
-}
-
-startServer().catch(console.error);
+// Escucha en el puerto que Dokploy asigna
+const port = process.env.PORT || 3000;
+server.listen(port, "0.0.0.0", () => {
+  console.log(`✅ Servidor listo en http://localhost:${port}`);
+});
