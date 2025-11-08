@@ -1,22 +1,26 @@
-// server/index.ts
-import express from "express";
-import { createServer } from "http";
-import path from "path";
+# Usa Node.js 20 (requerido por Vite 7)
+FROM node:20-alpine
 
-const app = express();
-const server = createServer(app);
+# Establece el directorio de trabajo
+WORKDIR /app
 
-// Sirve archivos estáticos desde dist/public
-const publicDir = path.resolve(process.cwd(), "dist", "public");
-app.use(express.static(publicDir, { index: false }));
+# Copia package.json y pnpm-lock.yaml primero (para caché eficiente)
+COPY package*.json ./
 
-// Maneja rutas SPA (fallback a index.html)
-app.get("*", (_req, res) => {
-  res.sendFile(path.join(publicDir, "index.html"));
-});
+# Instala pnpm globalmente
+RUN npm install -g pnpm@10
 
-// Escucha en el puerto que Dokploy asigna
-const port = process.env.PORT || 3000;
-server.listen(port, "0.0.0.0", () => {
-  console.log(`✅ Servidor listo en puerto ${port}`);
-});
+# Instala dependencias
+RUN pnpm install --frozen-lockfile
+
+# Copia todo el código fuente
+COPY . .
+
+# Ejecuta el build
+RUN pnpm run build
+
+# Expone el puerto (buenas prácticas)
+EXPOSE 3000
+
+# Inicia tu servidor Express
+CMD ["node", "dist/index.js"]
