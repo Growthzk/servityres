@@ -1,4 +1,4 @@
-# Usa una imagen oficial de Node.js 20 (o 22 si prefieres)
+# Usa Node.js 20 (oficial, ligero y compatible)
 FROM node:20-alpine
 
 # Establece el directorio de trabajo
@@ -7,20 +7,20 @@ WORKDIR /app
 # Copia package.json y pnpm-lock.yaml primero (para caché eficiente)
 COPY package.json pnpm-lock.yaml ./
 
-# Instala pnpm globalmente (opcional, pero recomendado)
+# Instala pnpm globalmente
 RUN npm install -g pnpm@10
 
-# Instala dependencias
-RUN pnpm install --frozen-lockfile
+# Instala dependencias (sin devDependencies en producción)
+RUN pnpm install --prod=false --frozen-lockfile
 
 # Copia todo el código fuente
 COPY . .
 
-# Ejecuta el build
+# Ejecuta el build (genera dist/public y dist/index.js)
 RUN pnpm run build
 
-# Expón el puerto (aunque Caddy lo manejará, es buena práctica)
+# Expón el puerto (buenas prácticas, aunque Dokploy lo ignore)
 EXPOSE 3000
 
-# Inicia la app
-CMD ["pnpm", "start"]
+# Inicia tu servidor Express
+CMD ["node", "dist/index.js"]
