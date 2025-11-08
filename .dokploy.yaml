@@ -1,0 +1,6 @@
+build:
+  type: docker
+  dockerfile: Dockerfile
+run:
+  command: ["node", "dist/index.js"]
+  port: 3000
