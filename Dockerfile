@@ -1,4 +1,4 @@
-# Usa Node.js 20 (oficial, ligero y compatible)
+# Usa Node.js 20 (la versión mínima requerida por Vite 7)
 FROM node:20-alpine
 
 # Establece el directorio de trabajo
@@ -10,16 +10,16 @@ COPY package.json pnpm-lock.yaml ./
 # Instala pnpm globalmente
 RUN npm install -g pnpm@10
 
-# Instala dependencias (sin devDependencies en producción)
-RUN pnpm install --prod=false --frozen-lockfile
+# Instala dependencias
+RUN pnpm install --frozen-lockfile
 
 # Copia todo el código fuente
 COPY . .
 
-# Ejecuta el build (genera dist/public y dist/index.js)
+# Ejecuta el build
 RUN pnpm run build
 
-# Expón el puerto (buenas prácticas, aunque Dokploy lo ignore)
+# Expone el puerto (buenas prácticas)
 EXPOSE 3000
 
 # Inicia tu servidor Express
